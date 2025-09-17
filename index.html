@@ -372,6 +372,18 @@
         }
     
         // Native form submission to FormSubmit (no interception)
+        const submissionForm = document.getElementById('gameSubmissionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const loadingIcon = document.getElementById('loadingIcon');
+
+        submissionForm.addEventListener('submit', () => {
+            // Browser validation runs before this handler; we don't call preventDefault
+            submitBtn.disabled = true;
+            btnText.textContent = 'Submitting...';
+            loadingIcon.classList.remove('hidden');
+            submitBtn.setAttribute('aria-busy', 'true');
+        });
     
         // Scroll animation
         const observerOptions = {
