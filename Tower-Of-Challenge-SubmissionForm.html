@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Challenge - Submit Your Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .file-upload-area {
+            transition: all 0.3s ease;
+        }
+        .file-upload-area:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .file-upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #1e293b;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 min-h-screen">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="animate-float inline-block">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-2xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-100 mb-4 animate-slide-up">
+                Tower of <span class="text-blue-400">Challenge</span>
+            </h1>
+            <p class="text-xl text-slate-300 animate-slide-up" style="animation-delay: 0.2s;">
+                Submit your game to join the tower
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Info Card -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-slate-100">
+                        <h3 class="text-lg font-semibold mb-2">How it works?</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Have you created an awesome game? Perfect! Fill out the form below with your game's details and upload your files. Our team will review your submission and integrate it into the Tower of Challenge if it meets our criteria.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden animate-slide-up">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-slate-100 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Submission Form
+                    </h2>
+
+                    <form id="gameSubmissionForm" class="space-y-6">
+                        <!-- Informations du développeur -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="developerName" class="block text-sm font-medium text-slate-200 mb-2">
+                                    Developer Name *
+                                </label>
+                                <input type="text" id="developerName" name="developerName" required
+                                       class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                       placeholder="Your name or pseudonym">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-200 mb-2">
+                                    Contact Email *
+                                </label>
+                                <input type="email" id="email" name="email" required
+                                       class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                       placeholder="your@email.com">
+                            </div>
+                        </div>
+
+                        <!-- Informations du jeu -->
+                        <div>
+                            <label for="gameName" class="block text-sm font-medium text-slate-200 mb-2">
+                                Game Name *
+                            </label>
+                            <input type="text" id="gameName" name="gameName" required
+                                   class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                   placeholder="Your game's name">
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="difficulty" class="block text-sm font-medium text-slate-200 mb-2">
+                                    Difficulty Level *
+                                </label>
+                                <select id="difficulty" name="difficulty" required
+                                        class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                                    <option class="text-slate-800" value="">Select difficulty</option>
+                                    <option class="text-slate-800" value="facile">Easy (1-3)</option>
+                                    <option class="text-slate-800" value="moyen">Medium (4-6)</option>
+                                    <option class="text-slate-800" value="difficile">Hard (7-8)</option>
+                                    <option class="text-slate-800" value="expert">Expert (9-10)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="genre" class="block text-sm font-medium text-slate-200 mb-2">
+                                    Game Genre *
+                                </label>
+                                <select id="genre" name="genre" required
+                                        class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                                    <option class="text-slate-800" value="">Select a genre</option>
+                                    <option class="text-slate-800" value="puzzle">Puzzle</option>
+                                    <option class="text-slate-800" value="action">Action</option>
+                                    <option class="text-slate-800" value="aventure">Adventure</option>
+                                    <option class="text-slate-800" value="strategie">Strategy</option>
+                                    <option class="text-slate-800" value="arcade">Arcade</option>
+                                    <option class="text-slate-800" value="reflexion">Puzzle</option>
+                                    <option class="text-slate-800" value="autre">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-slate-200 mb-2">
+                                Game Description *
+                            </label>
+                            <textarea id="description" name="description" rows="4" required
+                                      class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                      placeholder="Describe your game: gameplay, objectives, main mechanics..."></textarea>
+                        </div>
+
+                        <!-- Upload de fichier -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-200 mb-2">
+                                Game Files *
+                            </label>
+                            <div class="file-upload-area bg-slate-700/30 border-2 border-dashed border-slate-500 rounded-lg p-8 text-center cursor-pointer"
+                                 id="fileUploadArea">
+                                <input type="file" id="gameFiles" name="gameFiles" multiple accept=".zip,.rar,.7z,.js,.html,.css,.json" class="hidden">
+                                <div id="uploadContent">
+                                    <svg class="w-12 h-12 text-blue-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                    <p class="text-lg text-slate-100 mb-2">Drag and drop your files here</p>
+                                    <p class="text-sm text-slate-400 mb-4">or click to browse</p>
+                                    <p class="text-xs text-slate-500">Accepted formats: .zip, .rar, .7z, .js, .html, .css, .json</p>
+                                </div>
+                                <div id="fileList" class="hidden text-left"></div>
+                            </div>
+                        </div>
+
+                        <!-- Instructions supplémentaires -->
+                        <div>
+                            <label for="instructions" class="block text-sm font-medium text-slate-200 mb-2">
+                                Special Instructions
+                            </label>
+                            <textarea id="instructions" name="instructions" rows="3"
+                                      class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                      placeholder="Special instructions for playing or installing your game? (optional)"></textarea>
+                        </div>
+
+                        <!-- Bouton de soumission -->
+                        <div class="pt-4">
+                            <button type="submit" id="submitBtn"
+                                    class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent">
+                                <span id="btnText">Submit My Game</span>
+                                <svg id="loadingIcon" class="hidden w-5 h-5 ml-2 animate-spin inline" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Success Message (hidden by default) -->
+            <div id="successMessage" class="hidden bg-green-500/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 mt-6 animate-fade-in">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-400">Submission Successful!</h3>
+                        <p class="text-green-300">Thank you! Your game has been submitted successfully. We will contact you soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-gradient-to-r from-slate-900 via-blue-900/20 to-slate-900 py-12 mt-16 border-t border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-xl font-bold text-white mb-4 animate-slide-up">
+                        Tower of <span class="text-blue-400">Challenge</span>
+                    </h3>
+                    <p class="text-slate-400 leading-relaxed">A community platform for sharing, discovering, and challenging with games created by passionate developers.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-semibold text-white mb-4">Useful Links</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Home</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors duration-200">Submit a Game</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-500/10" aria-label="GitHub">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-500/10" aria-label="Discord">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 003.025-2.647.077.077 0 00-.01-.12 11.615 11.615 0 01-3.104-1.477.077.077 0 01-.007-.127c.014-.042.04-.042.09 0a13.573 13.573 0 003.542 1.289.077.077 0 00.093-.026 14.13 14.13 0 003.019-2.65.077.077 0 00-.009-.12 11.72 11.72 0 01-3.107-1.476.077.077 0 01-.006-.126c.014-.043.04-.043.09 0A13.589 13.589 0 0018.866 18a.077.077 0 00.084.027 19.841 19.841 0 006-.989.08.08 0 00.032-.057c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-500/10" aria-label="Reddit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-reddit" viewBox="0 0 16 16">
+                                <path d="M6.167 8a.83.83 0 0 0-.83.83c0 .459.372.84.83.831a.831.831 0 0 0 0-1.661m1.843 3.647c.315 0 1.403-.038 1.976-.611a.23.23 0 0 0 0-.306.213.213 0 0 0-.306 0c-.353.363-1.126.487-1.67.487-.545 0-1.308-.124-1.671-.487a.213.213 0 0 0-.306 0 .213.213 0 0 0 0 .306c.564.563 1.652.61 1.977.61zm.992-2.807c0 .458.373.83.831.83s.83-.381.83-.83a.831.831 0 0 0-1.66 0z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.828-1.165c-.315 0-.602.124-.812.325-.801-.573-1.9-.945-3.121-.993l.534-2.501 1.738.372a.83.83 0 1 0 .83-.869.83.83 0 0 0-.744.468l-1.938-.41a.2.2 0 0 0-.153.028.2.2 0 0 0-.086.134l-.592 2.788c-1.24.038-2.358.41-3.17.992-.21-.2-.496-.324-.81-.324a1.163 1.163 0 0 0-.478 2.224q-.03.17-.029.353c0 1.795 2.091 3.256 4.669 3.256s4.668-1.451 4.668-3.256c0-.114-.01-.238-.029-.353.401-.181.688-.592.688-1.069 0-.65-.525-1.165-1.165-1.165"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-6 text-center">
+                <p class="text-slate-400">&copy; 2025 Tower of Challenge. Made with ❤️ for the Reddit community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration Zapier
+        const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/24635947/um8zn0b/';
+        
+        // Configuration Cloudinary - REMPLACEZ CES VALEURS
+        const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dndo56jcu/upload';
+        const CLOUDINARY_UPLOAD_PRESET = 'tower-challenge-upload';
+    
+        // Global Variables
+        let selectedFiles = [];
+    
+        // Drag & drop and file selection handling
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('gameFiles');
+        const uploadContent = document.getElementById('uploadContent');
+        const fileList = document.getElementById('fileList');
+    
+        // Events for drag & drop
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+    
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.add('dragover');
+        });
+    
+        fileUploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+        });
+    
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            handleFiles(files);
+        });
+    
+        // File selection handling
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        });
+    
+        // Function to process selected files
+        function handleFiles(files) {
+            selectedFiles = files;
+            displayFiles();
+        }
+    
+        // Display selected files
+        function displayFiles() {
+            if (selectedFiles.length === 0) {
+                uploadContent.classList.remove('hidden');
+                fileList.classList.add('hidden');
+                return;
+            }
+    
+            uploadContent.classList.add('hidden');
+            fileList.classList.remove('hidden');
+    
+            fileList.innerHTML = `
+                <div class="space-y-2">
+                    <h4 class="text-slate-100 font-medium mb-3">Selected Files:</h4>
+                    ${selectedFiles.map((file, index) => `
+                        <div class="flex items-center justify-between bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                <span class="text-slate-100 text-sm">${file.name}</span>
+                                <span class="text-slate-400 text-xs ml-2">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                            </div>
+                            <button type="button" onclick="removeFile(${index})" class="text-red-400 hover:text-red-300 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `).join('')}
+                    <button type="button" onclick="addMoreFiles()" class="w-full mt-3 py-2 px-4 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 rounded-lg text-blue-400 text-sm transition-colors">
+                        Add More Files
+                    </button>
+                </div>
+            `;
+        }
+    
+        // Function to remove a file
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            displayFiles();
+        }
+    
+        // Function to add more files
+        function addMoreFiles() {
+            fileInput.click();
+        }
+    
+        // Function to upload files to Cloudinary
+        async function uploadFilesToCloudinary(files) {
+            const uploadPromises = files.map(async (file) => {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+                
+                try {
+                    const response = await fetch(CLOUDINARY_UPLOAD_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Erreur upload: ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    return {
+                        name: file.name,
+                        size: file.size,
+                        url: result.secure_url,
+                        public_id: result.public_id
+                    };
+                } catch (error) {
+                    console.error(`Erreur upload ${file.name}:`, error);
+                    return {
+                        name: file.name,
+                        size: file.size,
+                        url: null,
+                        error: error.message
+                    };
+                }
+            });
+            
+            return await Promise.all(uploadPromises);
+        }
+    
+        // Function to send data to Zapier webhook
+        async function sendToZapier(formData, uploadedFiles) {
+            try {
+                const response = await fetch(ZAPIER_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // Données structurées pour Zapier
+                        developer_name: formData.developerName,
+                        email: formData.email,
+                        game_name: formData.gameName,
+                        difficulty: formData.difficulty,
+                        genre: formData.genre,
+                        description: formData.description,
+                        instructions: formData.instructions || 'Aucune instruction spéciale',
+                        files_count: uploadedFiles.length,
+                        files_list: uploadedFiles.map(file => `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`).join(', '),
+                        files_urls: uploadedFiles.map(file => file.url).filter(url => url).join(', '),
+                        submission_date: new Date().toISOString(),
+                        submission_time: new Date().toLocaleString('fr-FR'),
+                        
+                        // Message formaté pour Telegram
+                        telegram_message: `🎮 **Nouvelle soumission de jeu - Tower of Challenge**
+    
+    👤 **Développeur:** ${formData.developerName}
+    📧 **Email:** ${formData.email}
+    
+    🎯 **Nom du jeu:** ${formData.gameName}
+    📊 **Difficulté:** ${formData.difficulty}
+     **Genre:** ${formData.genre}
+    
+    📝 **Description:**
+    ${formData.description}
+    
+    ${formData.instructions ? `📋 **Instructions spéciales:**\n${formData.instructions}` : ''}
+    
+    📁 **Fichiers sélectionnés (${uploadedFiles.length}):**
+    ${uploadedFiles.map(file => `• ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)${file.url ? `\n  🔗 ${file.url}` : `\n  ❌ Erreur upload`}`).join('\n')}
+    
+    ⏰ **Date de soumission:** ${new Date().toLocaleString('fr-FR')}`
+                    })
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+    
+                const result = await response.json();
+                console.log('Données envoyées à Zapier:', result);
+                return true;
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi vers Zapier:', error);
+                throw error;
+            }
+        }
+    
+        // Form submission handling
+        document.getElementById('gameSubmissionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loadingIcon = document.getElementById('loadingIcon');
+            const successMessage = document.getElementById('successMessage');
+    
+            // File validation
+            if (selectedFiles.length === 0) {
+                alert('Veuillez sélectionner au moins un fichier pour votre jeu.');
+                return;
+            }
+    
+            // Loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Upload des fichiers...';
+            loadingIcon.classList.remove('hidden');
+    
+            try {
+                // Collect form data
+                const formData = {
+                    developerName: document.getElementById('developerName').value,
+                    email: document.getElementById('email').value,
+                    gameName: document.getElementById('gameName').value,
+                    difficulty: document.getElementById('difficulty').value,
+                    genre: document.getElementById('genre').value,
+                    description: document.getElementById('description').value,
+                    instructions: document.getElementById('instructions').value,
+                    files: selectedFiles.map(file => ({ name: file.name, size: file.size }))
+                };
+    
+                console.log('Données de soumission:', formData);
+                
+                // Upload files to Cloudinary
+                btnText.textContent = 'Upload des fichiers...';
+                const uploadedFiles = await uploadFilesToCloudinary(selectedFiles);
+                console.log('Fichiers uploadés:', uploadedFiles);
+                
+                // Send to Zapier
+                btnText.textContent = 'Envoi vers Telegram...';
+                await sendToZapier(formData, uploadedFiles);
+    
+                // Reset form
+                this.reset();
+                selectedFiles = [];
+                displayFiles();
+    
+                // Display success message
+                successMessage.classList.remove('hidden');
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+    
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+    
+            } catch (error) {
+                console.error('Erreur lors de la soumission:', error);
+                alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                btnText.textContent = 'Submit My Game';
+                loadingIcon.classList.add('hidden');
+            }
+        });
+    
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+    
+        // Observe elements to animate
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
