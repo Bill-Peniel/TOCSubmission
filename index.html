@@ -81,6 +81,8 @@
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -165,10 +167,12 @@
                         Submission Form
                     </h2>
 
-                    <form id="gameSubmissionForm" class="space-y-6" action="https://formsubmit.co/billakpacheme84@gmail.com" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_subject" value="New Tower of Challenge submission">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
+                    <form id="gameSubmissionForm" class="space-y-6" netlify netlify-honeypot="bot-field">
+                        <!-- Hidden field for Netlify -->
+                        <input type="hidden" name="form-name" value="gameSubmissionForm">
+                        <div style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </div>
                         <!-- Informations du développeur -->
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -495,25 +499,140 @@
             fileInput.click();
         }
     
-        // Native form submission to FormSubmit (no interception)
+        // EmailJS Configuration
+        (function() {
+            emailjs.init("_GmicEt3w9ELpz4_i"); // Vous devrez remplacer par votre clé publique EmailJS
+        })();
+
+        // Enhanced form submission with EmailJS
         const submissionForm = document.getElementById('gameSubmissionForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const loadingIcon = document.getElementById('loadingIcon');
+        const successMessage = document.getElementById('successMessage');
 
-        // Ensure spinner is hidden on load (in case of hot reloads or cache)
+        // Ensure spinner is hidden on load
         document.addEventListener('DOMContentLoaded', () => {
             if (loadingIcon) loadingIcon.classList.add('hidden');
             if (submitBtn) submitBtn.removeAttribute('aria-busy');
         });
 
-        submissionForm.addEventListener('submit', () => {
-            // Browser validation runs before this handler; we don't call preventDefault
+        submissionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
             submitBtn.disabled = true;
             btnText.textContent = 'Submitting...';
             loadingIcon.classList.remove('hidden');
             submitBtn.setAttribute('aria-busy', 'true');
+
+            try {
+                // Collect form data
+                const formData = new FormData(submissionForm);
+                const data = {
+                    developerName: formData.get('developerName'),
+                    email: formData.get('email'),
+                    gameName: formData.get('gameName'),
+                    difficulty: formData.get('difficulty'),
+                    genre: formData.get('genre'),
+                    description: formData.get('description'),
+                    instructions: formData.get('instructions'),
+                    fileCount: selectedFiles.length,
+                    fileNames: selectedFiles.map(f => f.name).join(', ')
+                };
+
+                // Send email using EmailJS
+                const result = await emailjs.send('service_ovyux6e', 'template_erc7kby', data);
+                
+                console.log('Email sent successfully:', result);
+                
+                // Show success message
+                successMessage.classList.remove('hidden');
+                submissionForm.reset();
+                selectedFiles = [];
+                displayFiles();
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('EmailJS failed, trying fallback method:', error);
+                
+                // Fallback: Try Netlify Forms
+                try {
+                    await submitToNetlify(data);
+                } catch (netlifyError) {
+                    console.error('Netlify fallback failed, using manual method:', netlifyError);
+                    
+                    // Final fallback: Manual email generation
+                    generateManualEmail(data);
+                }
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.textContent = 'Submit My Game';
+                loadingIcon.classList.add('hidden');
+                submitBtn.removeAttribute('aria-busy');
+            }
         });
+
+        // Fallback function for Netlify Forms
+        async function submitToNetlify(data) {
+            const formData = new FormData();
+            Object.keys(data).forEach(key => {
+                formData.append(key, data[key]);
+            });
+            formData.append('form-name', 'gameSubmissionForm');
+            
+            const response = await fetch('/', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                successMessage.classList.remove('hidden');
+                submissionForm.reset();
+                selectedFiles = [];
+                displayFiles();
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                throw new Error('Netlify submission failed');
+            }
+        }
+
+        // Final fallback: Generate manual email
+        function generateManualEmail(data) {
+            const emailBody = `
+Nouvelle soumission Tower of Challenge:
+
+Développeur: ${data.developerName}
+Email: ${data.email}
+Nom du jeu: ${data.gameName}
+Difficulté: ${data.difficulty}
+Genre: ${data.genre}
+Description: ${data.description}
+Instructions spéciales: ${data.instructions}
+Fichiers: ${data.fileNames} (${data.fileCount} fichiers)
+
+Envoyez ce message à: billakpacheme84@gmail.com
+            `;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(emailBody).then(() => {
+                alert('Email généré et copié dans le presse-papiers !\n\nEnvoyez-le manuellement à: billakpacheme84@gmail.com\n\nOu utilisez le lien email ci-dessous.');
+                
+                // Create email link
+                const emailLink = `mailto:billakpacheme84@gmail.com?subject=Nouvelle soumission Tower of Challenge&body=${encodeURIComponent(emailBody)}`;
+                window.open(emailLink);
+                
+                successMessage.classList.remove('hidden');
+                submissionForm.reset();
+                selectedFiles = [];
+                displayFiles();
+            }).catch(() => {
+                alert('Erreur lors de la copie. Veuillez envoyer manuellement à: billakpacheme84@gmail.com');
+            });
+        }
     
         // Scroll animation
         const observerOptions = {
