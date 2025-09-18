@@ -526,20 +526,21 @@
             loadingIcon.classList.remove('hidden');
             submitBtn.setAttribute('aria-busy', 'true');
 
+            // Collect form data (moved outside try block)
+            const formData = new FormData(submissionForm);
+            const data = {
+                developerName: formData.get('developerName'),
+                email: formData.get('email'),
+                gameName: formData.get('gameName'),
+                difficulty: formData.get('difficulty'),
+                genre: formData.get('genre'),
+                description: formData.get('description'),
+                instructions: formData.get('instructions'),
+                fileCount: selectedFiles.length,
+                fileNames: selectedFiles.map(f => f.name).join(', ')
+            };
+
             try {
-                // Collect form data
-                const formData = new FormData(submissionForm);
-                const data = {
-                    developerName: formData.get('developerName'),
-                    email: formData.get('email'),
-                    gameName: formData.get('gameName'),
-                    difficulty: formData.get('difficulty'),
-                    genre: formData.get('genre'),
-                    description: formData.get('description'),
-                    instructions: formData.get('instructions'),
-                    fileCount: selectedFiles.length,
-                    fileNames: selectedFiles.map(f => f.name).join(', ')
-                };
 
                 // Send email using EmailJS
                 const result = await emailjs.send('service_ovyux6e', 'template_erc7kby', data);
