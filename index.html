@@ -1,101 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tower of Challenge - Submit Your Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Challenge - Submit Your Game</title>
   <!-- Tailwind CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
     .file-upload-area { transition: all 0.3s ease; }
     .file-upload-area:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
     .file-upload-area.dragover { border-color: #3b82f6; background-color: #1e293b; transform: scale(1.02); }
-  </style>
+    </style>
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 min-h-screen">
-  <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
-  </div>
-
-  <!-- Header -->
-  <header class="relative z-10 py-8">
-    <div class="container mx-auto px-4 text-center">
-      <div class="animate-float inline-block">
-        <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-2xl">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
-      </div>
-      <h1 class="text-4xl md:text-6xl font-bold text-slate-100 mb-4 animate-slide-up">
-        Tower of <span class="text-blue-400">Challenge</span>
-      </h1>
-      <p class="text-xl text-slate-300 animate-slide-up" style="animation-delay: 0.2s;">
-        Submit your game to join the tower
-      </p>
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
     </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="relative z-10 container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-      <!-- Info Card -->
-      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in">
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
+    <!-- Header -->
+    <header class="relative z-10 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="animate-float inline-block">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl flex items-center justify-center shadow-2xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
             </div>
-          </div>
-          <div class="text-slate-100">
-            <h3 class="text-lg font-semibold mb-2">How it works?</h3>
-            <p class="text-slate-300 leading-relaxed">
-              Have you created an awesome game? Perfect! Fill out the form below with your game's details and upload your files. Our team will review your submission and integrate it into the Tower of Challenge if it meets our criteria.
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-100 mb-4 animate-slide-up">
+                Tower of <span class="text-blue-400">Challenge</span>
+            </h1>
+            <p class="text-xl text-slate-300 animate-slide-up" style="animation-delay: 0.2s;">
+                Submit your game to join the tower
             </p>
-          </div>
         </div>
-      </div>
+    </header>
 
-      <!-- Form -->
-      <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden animate-slide-up">
-        <div class="p-8">
-          <h2 class="text-2xl font-bold text-slate-100 mb-6 flex items-center">
-            <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            Submission Form
-          </h2>
+    <!-- Main Content -->
+    <main class="relative z-10 container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Info Card -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-slate-100">
+                        <h3 class="text-lg font-semibold mb-2">How it works?</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Have you created an awesome game? Perfect! Fill out the form below with your game's details and upload your files. Our team will review your submission and integrate it into the Tower of Challenge if it meets our criteria.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-          <form id="gameSubmissionForm" class="space-y-6" 
-                action="https://formcarry.com/s/1ZG65BsJWXA" 
-                method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+            <!-- Form -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden animate-slide-up">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-slate-100 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Submission Form
+                    </h2>
+
+          <form id="gameSubmissionForm" class="space-y-6" name="gameSubmissionForm" method="POST" enctype="multipart/form-data" netlify netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="gameSubmissionForm">
+                        <p class="hidden">
+                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                        </p>
             
             <!-- Developer Info -->
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
                 <label for="developerName" class="block text-sm font-medium text-slate-200 mb-2">Developer Name *</label>
                 <input type="text" id="developerName" name="developerName" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-blue-500">
-              </div>
-              <div>
+                            </div>
+                            <div>
                 <label for="email" class="block text-sm font-medium text-slate-200 mb-2">Contact Email *</label>
                 <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-blue-500">
-              </div>
-            </div>
+                            </div>
+                        </div>
 
             <!-- Game Info -->
-            <div>
+                        <div>
               <label for="gameName" class="block text-sm font-medium text-slate-200 mb-2">Game Name *</label>
               <input type="text" id="gameName" name="gameName" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100">
-            </div>
+                        </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
                 <label for="difficulty" class="block text-sm font-medium text-slate-200 mb-2">Difficulty Level *</label>
                 <select id="difficulty" name="difficulty" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100">
                   <option value="">Select difficulty</option>
@@ -103,9 +105,9 @@
                   <option value="moyen">Medium (4-6)</option>
                   <option value="difficile">Hard (7-8)</option>
                   <option value="expert">Expert (9-10)</option>
-                </select>
-              </div>
-              <div>
+                                </select>
+                            </div>
+                            <div>
                 <label for="genre" class="block text-sm font-medium text-slate-200 mb-2">Game Genre *</label>
                 <select id="genre" name="genre" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100">
                   <option value="">Select a genre</option>
@@ -116,151 +118,150 @@
                   <option value="arcade">Arcade</option>
                   <option value="reflexion">Puzzle</option>
                   <option value="autre">Other</option>
-                </select>
-              </div>
-            </div>
+                                </select>
+                            </div>
+                        </div>
 
-            <div>
+                        <div>
               <label for="description" class="block text-sm font-medium text-slate-200 mb-2">Game Description *</label>
               <textarea id="description" name="description" rows="4" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100"></textarea>
-            </div>
+                        </div>
 
             <!-- File Upload -->
-            <div>
+                        <div>
               <label class="block text-sm font-medium text-slate-200 mb-2">Game Files *</label>
               <div class="file-upload-area bg-slate-700/30 border-2 border-dashed border-slate-500 rounded-lg p-8 text-center cursor-pointer" id="fileUploadArea">
-                <input type="file" id="gameFiles" name="file[]" multiple accept=".zip,.rar,.7z,.js,.html,.css,.json" class="hidden" required>
-                <div id="uploadContent">
-                  <p class="text-lg text-slate-100 mb-2">Drag and drop your files here</p>
-                  <p class="text-sm text-slate-400 mb-4">or click to browse</p>
-                  <p class="text-xs text-slate-500">Accepted formats: .zip, .rar, .7z</p>
-                  <p class="text-xs text-slate-500">Max size 5 MB per file</p>
-                </div>
-                <div id="fileList" class="hidden text-left"></div>
-              </div>
-            </div>
+                <input type="file" id="gameFiles" name="files" multiple accept=".zip,.rar,.7z,.js,.html,.css,.json" class="hidden" required>
+                                <div id="uploadContent">
+                                    <p class="text-lg text-slate-100 mb-2">Drag and drop your files here</p>
+                                    <p class="text-sm text-slate-400 mb-4">or click to browse</p>
+                                    <p class="text-xs text-slate-500">Accepted formats: .zip, .rar, .7z</p>
+                  <p class="text-xs text-slate-500">Max size 5 MB</p>
+                                </div>
+                                <div id="fileList" class="hidden text-left"></div>
+                            </div>
+                        </div>
 
-            <div>
+                        <div>
               <label for="instructions" class="block text-sm font-medium text-slate-200 mb-2">Special Instructions</label>
               <textarea id="instructions" name="instructions" rows="3" class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-100"></textarea>
-            </div>
+                        </div>
 
-            <div class="pt-4">
+                        <div class="pt-4">
               <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg">
                 Submit My Game
-              </button>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </form>
-        </div>
-      </div>
 
-      <div id="successMessage" class="hidden bg-green-500/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 mt-6 animate-fade-in">
-        <div class="flex items-center">
-          <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <div>
-            <h3 class="text-lg font-semibold text-green-400">Submission Successful!</h3>
+            <div id="successMessage" class="hidden bg-green-500/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 mt-6 animate-fade-in">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-400">Submission Successful!</h3>
             <p class="text-green-300">Thank you! Your game has been submitted successfully.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- JavaScript -->
-  <script>
-    let selectedFiles = [];
-    const fileUploadArea = document.getElementById('fileUploadArea');
-    const fileInput = document.getElementById('gameFiles');
-    const uploadContent = document.getElementById('uploadContent');
-    const fileList = document.getElementById('fileList');
-    const maxSizeMB = 5;
-
-    fileUploadArea.addEventListener('click', () => fileInput.click());
-    fileUploadArea.addEventListener('dragover', (e) => {
-      e.preventDefault(); fileUploadArea.classList.add('dragover');
-    });
-    fileUploadArea.addEventListener('dragleave', (e) => {
-      e.preventDefault(); fileUploadArea.classList.remove('dragover');
-    });
-    fileUploadArea.addEventListener('drop', (e) => {
-      e.preventDefault(); fileUploadArea.classList.remove('dragover');
-      handleFiles(Array.from(e.dataTransfer.files));
-    });
-    fileInput.addEventListener('change', (e) => handleFiles(Array.from(e.target.files)));
-
-    function handleFiles(files) {
-      const validFiles = files.filter(f => f.size / 1024 / 1024 <= maxSizeMB);
-      if (validFiles.length < files.length) alert(`Some files exceeded ${maxSizeMB} MB and were not added.`);
-      selectedFiles = [...selectedFiles, ...validFiles];
-      updateFileInput();
-      displayFiles();
-    }
-
-    function updateFileInput() {
-      const dt = new DataTransfer();
-      selectedFiles.forEach(file => dt.items.add(file));
-      fileInput.files = dt.files;
-    }
-
-    function displayFiles() {
-      if (selectedFiles.length === 0) {
-        uploadContent.classList.remove('hidden');
-        fileList.classList.add('hidden');
-        return;
-      }
-      uploadContent.classList.add('hidden');
-      fileList.classList.remove('hidden');
-      fileList.innerHTML = `
-        <div class="space-y-2">
-          <h4 class="text-slate-100 font-medium mb-3">Selected Files:</h4>
-          ${selectedFiles.map((file, index) => `
-            <div class="flex items-center justify-between bg-slate-700/30 rounded-lg p-3 border border-slate-600">
-              <div class="flex items-center">
-                <svg class="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                <span class="text-slate-100 text-sm">${file.name}</span>
-                <span class="text-slate-400 text-xs ml-2">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-              </div>
-              <button type="button" onclick="removeFile(${index})" class="text-red-400 hover:text-red-300">✕</button>
+                    </div>
+                </div>
             </div>
-          `).join('')}
-          <button type="button" onclick="addMoreFiles()" class="w-full mt-3 py-2 px-4 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 rounded-lg text-blue-400 text-sm">
-            Add More Files
-          </button>
-        </div>`;
-    }
+        </div>
+    </main>
 
-    function removeFile(index) {
-      selectedFiles.splice(index, 1);
-      updateFileInput();
-      displayFiles();
-    }
+  <!-- JavaScript for file list display -->
+    <script>
+        let selectedFiles = [];
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('gameFiles');
+        const uploadContent = document.getElementById('uploadContent');
+        const fileList = document.getElementById('fileList');
+    
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+        fileUploadArea.addEventListener('dragover', (e) => { e.preventDefault(); fileUploadArea.classList.add('dragover'); });
+        fileUploadArea.addEventListener('dragleave', (e) => { e.preventDefault(); fileUploadArea.classList.remove('dragover'); });
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault(); fileUploadArea.classList.remove('dragover');
+            // Assign dropped files directly to the input
+            fileInput.files = e.dataTransfer.files;
+            selectedFiles = Array.from(fileInput.files);
+            displayFiles();
+        });
+        fileInput.addEventListener('change', (e) => { selectedFiles = Array.from(fileInput.files); displayFiles(); });
 
+        function displayFiles() {
+            if (!fileInput.files || fileInput.files.length === 0) {
+                uploadContent.classList.remove('hidden');
+                fileList.classList.add('hidden');
+                return;
+            }
+            uploadContent.classList.add('hidden');
+            fileList.classList.remove('hidden');
+            fileList.innerHTML = `
+                <div class="space-y-2">
+                    <h4 class="text-slate-100 font-medium mb-3">Selected Files:</h4>
+                    ${Array.from(fileInput.files).map((file, index) => `
+                        <div class="flex items-center justify-between bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                <span class="text-slate-100 text-sm">${file.name}</span>
+                                <span class="text-slate-400 text-xs ml-2">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>`;
+        }
+    
+        function removeFile(index) {
+            // This function is no longer needed as fileInput.files is directly managed
+            // selectedFiles.splice(index, 1);
+            // const dt = new DataTransfer();
+            // selectedFiles.forEach(file => dt.items.add(file));
+            // fileInput.files = dt.files;
+            // displayFiles();
+        }
+    
     function addMoreFiles() { fileInput.click(); }
 
-    // Form submission
-    const form = document.getElementById('gameSubmissionForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      try {
-        const response = await fetch(form.action, { method: 'POST', body: formData });
-        if (response.ok) {
-          form.reset();
-          selectedFiles = [];
-          displayFiles();
-          document.getElementById('successMessage').classList.remove('hidden');
-        } else {
-          alert('Submission failed. Please try again.');
+        // Formcarry submission
+        const submissionForm = document.getElementById('gameSubmissionForm');
+        const submitBtn = document.querySelector('#gameSubmissionForm button[type="submit"]');
+        const successMessage = document.getElementById('successMessage');
+
+        function setLoadingState(isLoading) {
+            if (isLoading) {
+                submitBtn.disabled = true;
+                submitBtn.setAttribute('aria-busy', 'true');
+                submitBtn.dataset.originalText = submitBtn.textContent || 'Submit My Game';
+                submitBtn.textContent = 'Submitting...';
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('aria-busy');
+                submitBtn.textContent = submitBtn.dataset.originalText || 'Submit My Game';
+            }
         }
-      } catch (err) {
-        console.error(err);
-        alert('An error occurred. Please try again.');
-      }
-    });
-  </script>
+
+        // Netlify Forms: native POST handled by Netlify
+        submissionForm.setAttribute('method', 'POST');
+        submissionForm.setAttribute('enctype', 'multipart/form-data');
+
+        submissionForm.addEventListener('submit', (e) => {
+            // Do NOT preventDefault: let the browser perform native POST
+            setLoadingState(true);
+
+            // Prevent empty file submissions when files are required
+            if (!selectedFiles || selectedFiles.length === 0 || !fileInput.files || fileInput.files.length === 0) {
+                alert('Veuillez ajouter au moins un fichier.');
+                setLoadingState(false);
+                e.preventDefault();
+                return;
+            }
+
+            // Allow native submission to Netlify
+        });
+    </script>
 </body>
 </html>
