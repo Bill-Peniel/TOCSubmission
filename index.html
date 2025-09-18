@@ -541,11 +541,14 @@
             };
 
             try {
-
+                console.log('📧 Attempting EmailJS send with data:', data);
+                console.log('🔑 Using Service ID: service_ovyux6e');
+                console.log('📝 Using Template ID: template_erc7kby');
+                
                 // Send email using EmailJS
                 const result = await emailjs.send('service_ovyux6e', 'template_erc7kby', data);
                 
-                console.log('Email sent successfully:', result);
+                console.log('✅ Email sent successfully:', result);
                 
                 // Show success message
                 successMessage.classList.remove('hidden');
@@ -557,7 +560,12 @@
                 successMessage.scrollIntoView({ behavior: 'smooth' });
                 
             } catch (error) {
-                console.error('EmailJS failed, trying fallback method:', error);
+                console.error('❌ EmailJS failed with error:', error);
+                console.error('📊 Error details:', {
+                    status: error.status,
+                    text: error.text,
+                    message: error.message
+                });
                 
                 // Fallback: Try Netlify Forms
                 try {
@@ -566,6 +574,7 @@
                     console.error('Netlify fallback failed, using manual method:', netlifyError);
                     
                     // Final fallback: Manual email generation
+                    console.log('🚨 Activating manual email fallback');
                     generateManualEmail(data);
                 }
             } finally {
@@ -603,6 +612,8 @@
 
         // Final fallback: Generate manual email
         function generateManualEmail(data) {
+            console.log('📧 Generating manual email with data:', data);
+            
             const emailBody = `
 Nouvelle soumission Tower of Challenge:
 
@@ -619,18 +630,22 @@ Envoyez ce message à: billakpacheme84@gmail.com
             `;
             
             // Copy to clipboard
+            console.log('📋 Attempting to copy email to clipboard');
             navigator.clipboard.writeText(emailBody).then(() => {
+                console.log('✅ Email copied to clipboard successfully');
                 alert('Email généré et copié dans le presse-papiers !\n\nEnvoyez-le manuellement à: billakpacheme84@gmail.com\n\nOu utilisez le lien email ci-dessous.');
                 
                 // Create email link
                 const emailLink = `mailto:billakpacheme84@gmail.com?subject=Nouvelle soumission Tower of Challenge&body=${encodeURIComponent(emailBody)}`;
+                console.log('📧 Opening email client with link:', emailLink);
                 window.open(emailLink);
                 
                 successMessage.classList.remove('hidden');
                 submissionForm.reset();
                 selectedFiles = [];
                 displayFiles();
-            }).catch(() => {
+            }).catch((clipboardError) => {
+                console.error('❌ Clipboard copy failed:', clipboardError);
                 alert('Erreur lors de la copie. Veuillez envoyer manuellement à: billakpacheme84@gmail.com');
             });
         }
