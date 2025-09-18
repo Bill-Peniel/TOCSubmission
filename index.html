@@ -501,8 +501,10 @@
     
         // EmailJS Configuration
         (function() {
-            console.log('🔧 Initializing EmailJS with key: _GmicEt3w9ELpz4_i');
-            emailjs.init("_GmicEt3w9ELpz4_i");
+            // REMPLACEZ CETTE CLÉ PAR VOTRE VRAIE CLÉ PUBLIQUE EMAILJS
+            const PUBLIC_KEY = "N5ltLULOOMcGlH76v"; // À remplacer !
+            console.log('🔧 Initializing EmailJS with key:', PUBLIC_KEY);
+            emailjs.init(PUBLIC_KEY);
             console.log('✅ EmailJS initialized successfully');
             
             // Test EmailJS availability
