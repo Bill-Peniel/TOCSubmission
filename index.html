@@ -3,86 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="dummy-csrf-token-for-formsubmit">
     <title>Tower of Challenge - Submit Your Game</title>
-    
-    <!-- CSRF Prevention Script - Must load first -->
-    <script>
-        // Prevent CSRF errors by setting up tokens before any other scripts load
-        (function() {
-            // Set up Laravel object immediately
-            window.Laravel = {
-                csrfToken: 'dummy-csrf-token-for-formsubmit'
-            };
-            
-            // Diagnostic: Log all script loading
-            console.log('🔧 CSRF Prevention Script loaded');
-            
-            // Override console.error to suppress CSRF messages
-            const originalError = console.error;
-            console.error = function(...args) {
-                const message = args.join(' ');
-                if (message.includes('CSRF token not found') || 
-                    message.includes('csrf') || 
-                    message.includes('laravel.com/docs/csrf')) {
-                    console.log('🚫 CSRF error suppressed:', message);
-                    return; // Suppress CSRF errors
-                }
-                originalError.apply(console, args);
-            };
-            
-            // Set up axios defaults immediately if available
-            if (typeof axios !== 'undefined') {
-                console.log('📦 Axios detected, setting CSRF token');
-                axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
-                axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-            }
-            
-            // Monitor script loading
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.tagName === 'SCRIPT') {
-                            console.log('📜 Script loaded:', node.src || 'inline script');
-                            if (node.src && node.src.includes('app.js')) {
-                                console.log('⚠️  app.js detected from:', node.src);
-                            }
-                        }
-                    });
-                });
-            });
-            
-            observer.observe(document, { childList: true, subtree: true });
-            
-            // Intercept dynamically loaded scripts
-            const originalCreateElement = document.createElement;
-            document.createElement = function(tagName) {
-                const element = originalCreateElement.call(document, tagName);
-                if (tagName.toLowerCase() === 'script') {
-                    const originalSrc = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
-                    Object.defineProperty(element, 'src', {
-                        get: originalSrc.get,
-                        set: function(value) {
-                            if (value.includes('app.js') || value.includes('axios')) {
-                                console.log('🔄 Intercepting script:', value);
-                                // Delay execution to allow our CSRF setup
-                                setTimeout(() => {
-                                    originalSrc.set.call(this, value);
-                                }, 100);
-                                return;
-                            }
-                            originalSrc.set.call(this, value);
-                        }
-                    });
-                }
-                return element;
-            };
-        })();
-    </script>
-    
+    <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -167,12 +90,7 @@
                         Submission Form
                     </h2>
 
-                    <form id="gameSubmissionForm" class="space-y-6" netlify netlify-honeypot="bot-field">
-                        <!-- Hidden field for Netlify -->
-                        <input type="hidden" name="form-name" value="gameSubmissionForm">
-                        <div style="display: none;">
-                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
-                        </div>
+                    <form id="gameSubmissionForm" class="space-y-6" method="POST" enctype="multipart/form-data">
                         <!-- Informations du développeur -->
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -332,7 +250,7 @@
                         </a>
                         <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-500/10" aria-label="Discord">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 003.025-2.647.077.077 0 00-.01-.12 11.615 11.615 0 01-3.104-1.477.077.077 0 01-.007-.127c.014-.042.04-.042.09 0a13.573 13.573 0 003.542 1.289.077.077 0 00.093-.026 14.13 14.13 0 003.019-2.65.077.077 0 00-.009-.12 11.72 11.72 0 01-3.107-1.476.077.077 0 01-.006-.126c.014-.043.04-.043.09 0A13.589 13.589 0 0018.866 18a.077.077 0 00.084.027 19.841 19.841 0 006-.989.08.08 0 00.032-.057c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Z"/>
+                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 003.025-2.647.077.077 0 00-.01-.12 11.615 11.615 0 01-3.104-1.477.077.077 0 01-.007-.127c.014-.042.04-.042.09 0a13.573 13.573 0 003.542 1.289.077.077 0 00.093-.026 14.13 14.13 0 003.019-2.65.077.077 0 00-.009-.12 11.72 11.72 0 01-3.107-1.476.077.077 0 01-.006-.126c.014-.043.04-.043.09 0A13.589 13.589 0 0018.866 18a.077.077 0 00.084.027 19.841 19.841 0 006-.989.08.08 0 00.032-.057c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Z"/>
                             </svg>
                         </a>
                         <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-500/10" aria-label="Reddit">
@@ -352,56 +270,6 @@
     </footer>
 
     <script>
-        // Enhanced CSRF Token setup (redundant with head script but ensures coverage)
-        const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-        window.Laravel = {
-            csrfToken: csrfMeta ? csrfMeta.getAttribute('content') : 'dummy-csrf-token-for-formsubmit'
-        };
-
-        // Global error handler to catch any remaining CSRF errors
-        window.addEventListener('error', function(event) {
-            if (event.message && event.message.includes('CSRF token not found')) {
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-            }
-        });
-
-        // Setup axios defaults if axios is loaded
-        if (typeof axios !== 'undefined') {
-            axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
-            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-            
-            // Enhanced axios interceptor
-            axios.interceptors.response.use(
-                response => response,
-                error => {
-                    if (error.response && error.response.status === 419) {
-                        console.log('CSRF error suppressed for FormSubmit compatibility');
-                        return Promise.resolve({ data: { success: true } });
-                    }
-                    return Promise.reject(error);
-                }
-            );
-        }
-
-        // Setup fetch defaults
-        const originalFetch = window.fetch;
-        window.fetch = function(url, options = {}) {
-            if (options.method && options.method !== 'GET') {
-                options.headers = {
-                    ...options.headers,
-                    'X-CSRF-TOKEN': window.Laravel.csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                };
-            }
-            return originalFetch(url, options);
-        };
-
-        // FormSubmit: native form post setup (email configured in form action)
-
         // Global Variables
         let selectedFiles = [];
     
@@ -499,30 +367,14 @@
             fileInput.click();
         }
     
-        // EmailJS Configuration
-        (function() {
-            // REMPLACEZ CETTE CLÉ PAR VOTRE VRAIE CLÉ PUBLIQUE EMAILJS
-            const PUBLIC_KEY = "N5ItLULOOMcGIH76v"; // Clé corrigée avec les bons caractères
-            console.log('🔧 Initializing EmailJS with key:', PUBLIC_KEY);
-            emailjs.init(PUBLIC_KEY);
-            console.log('✅ EmailJS initialized successfully');
-            
-            // Test EmailJS availability
-            if (typeof emailjs !== 'undefined') {
-                console.log('✅ EmailJS SDK loaded correctly');
-            } else {
-                console.error('❌ EmailJS SDK not loaded');
-            }
-        })();
-
-        // Enhanced form submission with EmailJS
+        // Formspree submission (replace FORM_ID with your Formspree form ID)
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkgvldwl';
         const submissionForm = document.getElementById('gameSubmissionForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const loadingIcon = document.getElementById('loadingIcon');
         const successMessage = document.getElementById('successMessage');
 
-        // Ensure spinner is hidden on load
         document.addEventListener('DOMContentLoaded', () => {
             if (loadingIcon) loadingIcon.classList.add('hidden');
             if (submitBtn) submitBtn.removeAttribute('aria-busy');
@@ -530,89 +382,34 @@
 
         submissionForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Show loading state
+
             submitBtn.disabled = true;
             btnText.textContent = 'Submitting...';
             loadingIcon.classList.remove('hidden');
             submitBtn.setAttribute('aria-busy', 'true');
 
-            // Collect form data (moved outside try block)
-            const formData = new FormData(submissionForm);
-            const data = {
-                developerName: formData.get('developerName'),
-                email: formData.get('email'),
-                gameName: formData.get('gameName'),
-                difficulty: formData.get('difficulty'),
-                genre: formData.get('genre'),
-                description: formData.get('description'),
-                instructions: formData.get('instructions'),
-                fileCount: selectedFiles.length,
-                fileNames: selectedFiles.map(f => f.name).join(', ')
-            };
-
             try {
-                console.log('📧 Attempting EmailJS send with data:', data);
-                console.log('🔑 Using Service ID: service_ovyux6e');
-                console.log('📝 Using Template ID: template_erc7kby');
-                
-                // Send email using EmailJS avec les vrais IDs de votre dashboard
-                const SERVICE_ID = "service_ovyux6e"; // Votre vrai Service ID
-                const TEMPLATE_ID = "ezy7jku"; // Nouveau template "Nouvelle soumission Tower of Challenge"
-                
-                console.log('📧 Sending with Service ID:', SERVICE_ID);
-                console.log('📧 Sending with Template ID:', TEMPLATE_ID);
-                
-                const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, data);
-                
-                console.log('✅ Email sent successfully:', result);
-                
-                // Show success message
+                const formData = new FormData(submissionForm);
+                // Files already synced to input via handleFiles
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Form submission failed');
+                }
+
                 successMessage.classList.remove('hidden');
                 submissionForm.reset();
                 selectedFiles = [];
                 displayFiles();
-                
-                // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-            } catch (error) {
-                console.error('❌ EmailJS failed with error:', error);
-                console.error('📊 Error details:', {
-                    status: error.status,
-                    text: error.text,
-                    message: error.message,
-                    stack: error.stack
-                });
-                
-                // Log the full error object
-                console.error('🔍 Full error object:', JSON.stringify(error, null, 2));
-                
-                // Check if it's a specific EmailJS error
-                if (error.status) {
-                    console.error(`🚨 EmailJS Error ${error.status}: ${error.text || error.message}`);
-                    
-                    if (error.status === 400) {
-                        console.error('💡 Solution: Vérifiez que le Service ID et Template ID existent dans votre dashboard EmailJS');
-                    } else if (error.status === 401) {
-                        console.error('💡 Solution: Vérifiez votre clé publique EmailJS');
-                    } else if (error.status === 403) {
-                        console.error('💡 Solution: Vérifiez que le service et template sont publics');
-                    }
-                }
-                
-                // Fallback: Try Netlify Forms
-                try {
-                    await submitToNetlify(data);
-                } catch (netlifyError) {
-                    console.error('Netlify fallback failed, using manual method:', netlifyError);
-                    
-                    // Final fallback: Manual email generation
-                    console.log('🚨 Activating manual email fallback');
-                    generateManualEmail(data);
-                }
+            } catch (err) {
+                alert('Submission failed. Please try again.');
+                console.error('Formspree submission error:', err);
             } finally {
-                // Reset button state
                 submitBtn.disabled = false;
                 btnText.textContent = 'Submit My Game';
                 loadingIcon.classList.add('hidden');
@@ -620,70 +417,6 @@
             }
         });
 
-        // Fallback function for Netlify Forms
-        async function submitToNetlify(data) {
-            const formData = new FormData();
-            Object.keys(data).forEach(key => {
-                formData.append(key, data[key]);
-            });
-            formData.append('form-name', 'gameSubmissionForm');
-            
-            const response = await fetch('/', {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (response.ok) {
-                successMessage.classList.remove('hidden');
-                submissionForm.reset();
-                selectedFiles = [];
-                displayFiles();
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                throw new Error('Netlify submission failed');
-            }
-        }
-
-        // Final fallback: Generate manual email
-        function generateManualEmail(data) {
-            console.log('📧 Generating manual email with data:', data);
-            
-            const emailBody = `
-Nouvelle soumission Tower of Challenge:
-
-Développeur: ${data.developerName}
-Email: ${data.email}
-Nom du jeu: ${data.gameName}
-Difficulté: ${data.difficulty}
-Genre: ${data.genre}
-Description: ${data.description}
-Instructions spéciales: ${data.instructions}
-Fichiers: ${data.fileNames} (${data.fileCount} fichiers)
-
-Envoyez ce message à: billakpacheme84@gmail.com
-            `;
-            
-            // Copy to clipboard
-            console.log('📋 Attempting to copy email to clipboard');
-            navigator.clipboard.writeText(emailBody).then(() => {
-                console.log('✅ Email copied to clipboard successfully');
-                alert('Email généré et copié dans le presse-papiers !\n\nEnvoyez-le manuellement à: billakpacheme84@gmail.com\n\nOu utilisez le lien email ci-dessous.');
-                
-                // Create email link
-                const emailLink = `mailto:billakpacheme84@gmail.com?subject=Nouvelle soumission Tower of Challenge&body=${encodeURIComponent(emailBody)}`;
-                console.log('📧 Opening email client with link:', emailLink);
-                window.open(emailLink);
-                
-                successMessage.classList.remove('hidden');
-                submissionForm.reset();
-                selectedFiles = [];
-                displayFiles();
-            }).catch((clipboardError) => {
-                console.error('❌ Clipboard copy failed:', clipboardError);
-                alert('Erreur lors de la copie. Veuillez envoyer manuellement à: billakpacheme84@gmail.com');
-            });
-        }
-    
         // Scroll animation
         const observerOptions = {
             threshold: 0.1,
