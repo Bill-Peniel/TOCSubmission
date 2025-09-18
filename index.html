@@ -556,8 +556,14 @@
                 console.log('🔑 Using Service ID: service_ovyux6e');
                 console.log('📝 Using Template ID: template_erc7kby');
                 
-                // Send email using EmailJS
-                const result = await emailjs.send('service_ovyux6e', 'template_erc7kby', data);
+                // Send email using EmailJS avec les vrais IDs de votre dashboard
+                const SERVICE_ID = "service_ovyux6e"; // Votre vrai Service ID
+                const TEMPLATE_ID = "ezy7jku"; // Nouveau template "Nouvelle soumission Tower of Challenge"
+                
+                console.log('📧 Sending with Service ID:', SERVICE_ID);
+                console.log('📧 Sending with Template ID:', TEMPLATE_ID);
+                
+                const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, data);
                 
                 console.log('✅ Email sent successfully:', result);
                 
