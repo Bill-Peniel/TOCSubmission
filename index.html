@@ -501,7 +501,16 @@
     
         // EmailJS Configuration
         (function() {
-            emailjs.init("_GmicEt3w9ELpz4_i"); // Vous devrez remplacer par votre clé publique EmailJS
+            console.log('🔧 Initializing EmailJS with key: _GmicEt3w9ELpz4_i');
+            emailjs.init("_GmicEt3w9ELpz4_i");
+            console.log('✅ EmailJS initialized successfully');
+            
+            // Test EmailJS availability
+            if (typeof emailjs !== 'undefined') {
+                console.log('✅ EmailJS SDK loaded correctly');
+            } else {
+                console.error('❌ EmailJS SDK not loaded');
+            }
         })();
 
         // Enhanced form submission with EmailJS
@@ -564,8 +573,25 @@
                 console.error('📊 Error details:', {
                     status: error.status,
                     text: error.text,
-                    message: error.message
+                    message: error.message,
+                    stack: error.stack
                 });
+                
+                // Log the full error object
+                console.error('🔍 Full error object:', JSON.stringify(error, null, 2));
+                
+                // Check if it's a specific EmailJS error
+                if (error.status) {
+                    console.error(`🚨 EmailJS Error ${error.status}: ${error.text || error.message}`);
+                    
+                    if (error.status === 400) {
+                        console.error('💡 Solution: Vérifiez que le Service ID et Template ID existent dans votre dashboard EmailJS');
+                    } else if (error.status === 401) {
+                        console.error('💡 Solution: Vérifiez votre clé publique EmailJS');
+                    } else if (error.status === 403) {
+                        console.error('💡 Solution: Vérifiez que le service et template sont publics');
+                    }
+                }
                 
                 // Fallback: Try Netlify Forms
                 try {
