@@ -375,6 +375,11 @@
         const loadingIcon = document.getElementById('loadingIcon');
         const successMessage = document.getElementById('successMessage');
 
+        // Ensure the form is configured for native fallback as well
+        submissionForm.setAttribute('action', FORMSPREE_ENDPOINT);
+        submissionForm.setAttribute('method', 'POST');
+        submissionForm.setAttribute('enctype', 'multipart/form-data');
+
         document.addEventListener('DOMContentLoaded', () => {
             if (loadingIcon) loadingIcon.classList.add('hidden');
             if (submitBtn) submitBtn.removeAttribute('aria-busy');
@@ -390,7 +395,6 @@
 
             try {
                 const formData = new FormData(submissionForm);
-                // Files already synced to input via handleFiles
                 const response = await fetch(FORMSPREE_ENDPOINT, {
                     method: 'POST',
                     body: formData,
@@ -398,11 +402,19 @@
                 });
 
                 if (!response.ok) {
-                    let errText = 'Form submission failed';
+                    let errText = `Form submission failed (status ${response.status})`;
                     try {
-                        const err = await response.json();
-                        if (err && err.errors && err.errors.length) {
-                            errText = err.errors.map(e => e.message).join(' | ');
+                        const ct = response.headers.get('content-type') || '';
+                        if (ct.includes('application/json')) {
+                            const err = await response.json();
+                            if (err && err.errors && err.errors.length) {
+                                errText = err.errors.map(e => e.message).join(' | ');
+                            } else if (err.message) {
+                                errText = err.message;
+                            }
+                        } else {
+                            const t = await response.text();
+                            if (t) errText += `: ${t}`;
                         }
                     } catch (_) {}
                     throw new Error(errText);
@@ -414,8 +426,13 @@
                 displayFiles();
                 successMessage.scrollIntoView({ behavior: 'smooth' });
             } catch (err) {
-                alert('Submission failed: ' + (err?.message || 'Please try again.'));
                 console.error('Formspree submission error:', err);
+                alert((err && err.message) ? `Submission failed: ${err.message}` : 'Submission failed. Please try again.');
+                // Fallback: native submit in case of CORS/config issues
+                try {
+                    submissionForm.removeEventListener('submit', () => {});
+                    submissionForm.submit();
+                } catch (_) {}
             } finally {
                 submitBtn.disabled = false;
                 btnText.textContent = 'Submit My Game';
