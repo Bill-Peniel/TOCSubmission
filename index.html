@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="">
     <title>Tower of Challenge - Submit Your Game</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -272,6 +273,30 @@
     </footer>
 
     <script>
+        // CSRF Token setup for Laravel compatibility
+        window.Laravel = {
+            csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+
+        // Setup axios defaults if axios is loaded
+        if (typeof axios !== 'undefined') {
+            axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+        }
+
+        // Setup fetch defaults
+        const originalFetch = window.fetch;
+        window.fetch = function(url, options = {}) {
+            if (options.method && options.method !== 'GET') {
+                options.headers = {
+                    ...options.headers,
+                    'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                };
+            }
+            return originalFetch(url, options);
+        };
+
         // FormSubmit: native form post setup (email configured in form action)
 
         // Global Variables
